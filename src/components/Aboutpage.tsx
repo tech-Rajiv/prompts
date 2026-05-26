@@ -16,7 +16,7 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroLeft}>
-            <div className={styles.sectionLabel}>// About the maker</div>
+            <div className={styles.sectionLabel}>{"// About the maker"}</div>
             <h1 className={styles.heroHeading}>
               Built by one person.
               <br />
@@ -96,7 +96,7 @@ export default function AboutPage() {
       <section className={styles.story}>
         <div className={styles.storyInner}>
           <div className={styles.storyLeft}>
-            <div className={styles.sectionLabel}>// The Story</div>
+            <div className={styles.sectionLabel}>{"// The Story"}</div>
             <h2 className={styles.storyHeading}>Why I built this</h2>
           </div>
           <div className={styles.storyRight}>
@@ -135,7 +135,7 @@ export default function AboutPage() {
             className={styles.sectionLabel}
             style={{ textAlign: "center", marginBottom: "0.75rem" }}
           >
-            // Roadmap
+            {"// Roadmap"}
           </div>
           <h2 className={styles.buildingHeading}>What&apos;s coming next</h2>
           <p className={styles.buildingSub}>
@@ -272,7 +272,7 @@ export default function AboutPage() {
           </div>
 
           <div className={styles.philosophyRight}>
-            <div className={styles.sectionLabel}>// My Philosophy</div>
+            <div className={styles.sectionLabel}>{"// My Philosophy"}</div>
             <h2 className={styles.philosophyHeading}>
               No gatekeeping.
               <br />
@@ -295,7 +295,7 @@ export default function AboutPage() {
       {/* ── CONNECT ── */}
       <section className={styles.connect}>
         <div className={styles.connectInner}>
-          <div className={styles.sectionLabel}>// Get in touch</div>
+          <div className={styles.sectionLabel}>{"// Get in touch"}</div>
           <h2 className={styles.connectHeading}>
             Let&apos;s <span className={styles.accent}>connect.</span>
           </h2>
