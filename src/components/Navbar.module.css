@@ -99,6 +99,166 @@
   margin-left: 0.75rem;
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobileToggle {
+  display: none;
+  width: 42px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(0, 245, 196, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.mobileToggle:hover {
+  border-color: rgba(0, 245, 196, 0.45);
+  background: rgba(0, 245, 196, 0.05);
+}
+
+.mobileToggleBar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--muted);
+  transition: background 0.2s;
+}
+
+.mobileToggle:hover .mobileToggleBar {
+  background: var(--neon);
+}
+
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(5, 8, 16, 0.86);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: flex-end;
+  animation: navFadeIn 0.2s ease both;
+}
+
+.mobileDrawer {
+  width: min(86vw, 360px);
+  height: 100%;
+  background: rgba(5, 8, 16, 0.95);
+  border-left: 1px solid rgba(0, 245, 196, 0.15);
+  box-shadow:
+    -1px 0 0 rgba(0, 245, 196, 0.05),
+    -16px 0 48px rgba(0, 0, 0, 0.55);
+  padding: 1.1rem 1.1rem 1.25rem;
+  animation: navSlideIn 0.22s ease both;
+}
+
+.mobileDrawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(0, 245, 196, 0.12);
+}
+
+.mobileDrawerBrand {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.mobileDrawerBrand span {
+  color: var(--neon);
+}
+
+.mobileDrawerClose {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.mobileDrawerClose:hover {
+  color: var(--neon);
+}
+
+.mobileNavLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.mobileNavLink {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 245, 196, 0.08);
+  color: var(--text);
+  padding: 0.9rem 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.mobileNavLink:hover {
+  color: var(--neon);
+  background: rgba(0, 245, 196, 0.04);
+}
+
+.mobileNavLinkActive {
+  color: var(--neon);
+}
+
+.mobileNavLinkYT {
+  border-bottom-color: rgba(255, 204, 0, 0.22) !important;
+  background: rgba(255, 204, 0, 0.05) !important;
+  color: var(--neon4) !important;
+}
+
+.mobileNavLinkYT:hover {
+  background: rgba(255, 204, 0, 0.12) !important;
+  color: var(--neon4) !important;
+}
+
+.mobileNavLinks li:last-child .mobileNavLink {
+  border-bottom: none;
+}
+
+@keyframes navFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes navSlideIn {
+  from { transform: translateX(12px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
 .navCta:hover {
   background: var(--neon);
   color: #000;
@@ -110,5 +270,11 @@
   }
   .navLinks {
     display: none;
+  }
+  .mobileToggle {
+    display: inline-flex;
+  }
+  .navCta {
+    margin-left: 0;
   }
 }
