@@ -1,0 +1,35 @@
+.footer {
+  border-top: 1px solid rgba(0, 245, 196, 0.08);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand {
+  color: var(--neon);
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+}
+
+.links a:hover {
+  color: var(--neon);
+}

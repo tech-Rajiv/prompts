@@ -1,0 +1,114 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: rgba(5, 8, 16, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0, 245, 196, 0.08);
+  transition: background 0.3s;
+}
+
+.scrolled {
+  background: rgba(5, 8, 16, 0.97);
+}
+
+.logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.logo span {
+  color: var(--neon);
+}
+
+.navLinks {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+  align-items: center;
+}
+
+.navLink {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+}
+
+.navLink:hover,
+.navLinkActive {
+  color: var(--neon);
+}
+
+.ytNavItem {
+  position: relative;
+}
+
+.ytNavLink {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 204, 0, 0.08) !important;
+  border: 1px solid rgba(255, 204, 0, 0.3) !important;
+  color: var(--neon4) !important;
+  padding: 0.35rem 0.85rem !important;
+  border-radius: 2px;
+  animation: pulseYT 2.5s ease-in-out infinite;
+}
+
+.ytNavLink:hover {
+  background: rgba(255, 204, 0, 0.2) !important;
+  color: var(--neon4) !important;
+}
+
+.newBadge {
+  background: var(--neon4);
+  color: #000;
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  animation: popBadge 1s ease both;
+  flex-shrink: 0;
+}
+
+.navCta {
+  background: transparent;
+  border: 1px solid var(--neon);
+  color: var(--neon);
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 0.75rem;
+}
+
+.navCta:hover {
+  background: var(--neon);
+  color: #000;
+}
+
+@media (max-width: 700px) {
+  .nav {
+    padding: 1rem 1.25rem;
+  }
+  .navLinks {
+    display: none;
+  }
+}

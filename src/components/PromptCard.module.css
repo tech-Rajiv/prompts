@@ -1,0 +1,264 @@
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--card-border-h);
+  transform: translateY(-4px);
+}
+
+.trendingTag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--neon3);
+  color: #000;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  z-index: 5;
+}
+
+.cardImg {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: var(--bg3);
+}
+
+.beforeAfter {
+  display: flex;
+  height: 100%;
+}
+
+.before,
+.after {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.divider {
+  width: 2px;
+  background: var(--neon);
+  height: 100%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--neon);
+  position: relative;
+  z-index: 2;
+}
+
+.baLabel {
+  position: absolute;
+  top: 8px;
+  font-size: 0.5rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 3;
+}
+
+/* HOVER OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 8, 16, 0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.overlayTag {
+  font-size: 0.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--neon);
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(0, 245, 196, 0.3);
+  padding: 2px 8px;
+}
+
+.overlayPrompt {
+  font-size: 0.65rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.overlayActions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.copyBtn {
+  flex: 1;
+  background: var(--neon);
+  color: #000;
+  border: none;
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.copyBtn:hover {
+  background: #00c9a4;
+}
+
+.viewBtn {
+  flex: 1;
+  background: transparent;
+  color: var(--neon2);
+  border: 1px solid var(--neon2);
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.viewBtn:hover {
+  background: var(--neon2);
+  color: #000;
+}
+
+/* CARD FOOTER */
+.cardInfo {
+  padding: 1rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.cardTitle {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardTool {
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.cardFire {
+  font-size: 0.6rem;
+  color: var(--neon3);
+  letter-spacing: 0.5px;
+}
+
+.engagement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(0, 245, 196, 0.08);
+}
+
+.engagementLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.engagementBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.card:hover .engagementBtn {
+  color: var(--text);
+}
+
+.engagementIcon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.heartIcon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--neon3);
+}
+
+.heartOutline,
+.heartFill {
+  transition: opacity 0.15s ease;
+}
+
+.heartFill {
+  opacity: 0;
+}
+
+.engagementBtnLike:hover .heartOutline {
+  opacity: 0;
+}
+
+.engagementBtnLike:hover .heartFill {
+  opacity: 1;
+}
+
+.engagementBtnComment .engagementIcon {
+  color: var(--neon);
+}
+
+.engagementBtnShare .engagementIcon {
+  color: var(--neon);
+}
+
+.engagementBtnBookmark .engagementIcon {
+  color: var(--neon2);
+}

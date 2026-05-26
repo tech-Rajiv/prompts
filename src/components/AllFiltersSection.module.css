@@ -1,0 +1,56 @@
+.section {
+  padding: 7rem 2rem 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.filterRow {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.filterBtn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(136, 146, 176, 0.3);
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterBtn:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+.filterActive {
+  background: var(--neon) !important;
+  color: #000 !important;
+  border-color: var(--neon) !important;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
