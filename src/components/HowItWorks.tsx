@@ -5,7 +5,7 @@ export default function HowItWorks() {
     <section className={styles.how}>
       <div className={styles.inner}>
         <div className={styles.left}>
-          <div className="section-label">// How It Works</div>
+          <div className="section-label">{'// How It Works'}</div>
           <h2 className="section-title">Three steps.<br />Insane results.</h2>
           <ul className={styles.stepsList}>
             <li className={styles.stepItem}>
@@ -41,9 +41,9 @@ export default function HowItWorks() {
           <div className={styles.termLine}><span className={styles.comment}>{'// Cyberpunk Portrait'}</span></div>
           <div className={styles.termLine}>&nbsp;</div>
           <div className={styles.termLine}><span className={styles.prompt}>PROMPT</span> <span className={styles.val}>→</span></div>
-          <div className={`${styles.termLine} ${styles.termCode}`}>"Cinematic cyberpunk portrait,</div>
+          <div className={`${styles.termLine} ${styles.termCode}`}>&quot;Cinematic cyberpunk portrait,</div>
           <div className={`${styles.termLine} ${styles.termCode}`}>neon rim lighting, rain bokeh,</div>
-          <div className={`${styles.termLine} ${styles.termCode}`}>8k, hyperrealistic, --ar 2:3"</div>
+          <div className={`${styles.termLine} ${styles.termCode}`}>8k, hyperrealistic, --ar 2:3&quot;</div>
           <div className={styles.termLine}>&nbsp;</div>
           <div className={styles.termLine}><span className={styles.prompt}>TOOL</span>&nbsp;&nbsp;<span className={styles.val}>→</span> <span className={styles.out}>Midjourney v6</span></div>
           <div className={styles.termLine}><span className={styles.prompt}>STEPS</span>&nbsp;<span className={styles.val}>→</span> <span className={styles.out}>Upload photo → /imagine</span></div>

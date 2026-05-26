@@ -112,7 +112,7 @@ export default function YTSection() {
             <div className={styles.ytTitleBlock}>
               <div className={styles.ytSectionLabel}>
                 <span className={styles.ytNewPill}>✦ NEW</span>
-                // YouTube Thumbnail Studio
+                {'// YouTube Thumbnail Studio'}
               </div>
               <h2 className={styles.ytTitle}>
                 Turn any photo into a<br />

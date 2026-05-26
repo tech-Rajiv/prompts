@@ -14,7 +14,7 @@ export default function Contact() {
   return (
     <section className={styles.contact} id="contact">
       <div className={styles.inner}>
-        <div className="section-label">// Contact</div>
+        <div className="section-label">{'// Contact'}</div>
         <h2 className="section-title">Got a prompt to share?</h2>
         <p className={styles.sub}>
           Submit your best AI image prompts and we&apos;ll add them to the library.

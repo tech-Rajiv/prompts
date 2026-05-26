@@ -3,7 +3,7 @@ import styles from './About.module.css';
 export default function About() {
   return (
     <section className={styles.about} id="about">
-      <div className="section-label">// About</div>
+      <div className="section-label">{'// About'}</div>
       <h2 className="section-title">Why PromptForYou?</h2>
       <p className={styles.sub}>
         We got tired of seeing incredible AI edits with zero credits. This is the missing
