@@ -1,15 +1,31 @@
 'use client';
 
 import { useState } from 'react';
-import { prompts, filterCategories, type PromptBadge } from '@/data/prompts';
+import {
+  prompts,
+  filterCategories,
+  sortPrompts,
+  type PromptBadge,
+  type SortOption,
+} from '@/data/prompts';
 import { useGuestCopyLimit } from '@/hooks/useGuestCopyLimit';
 import LoginModal from './LoginModal';
 import PromptCard from './PromptCard';
+import SortDropdown from './SortDropdown';
 import Toast from './Toast';
 import styles from './AllFiltersSection.module.css';
 
+const FILTER_THEME: Record<string, string> = {
+  All: 'all',
+  Trending: 'trending',
+  Popular: 'popular',
+  "Editor's Pick": 'editors',
+  Premium: 'premium',
+};
+
 export default function AllFiltersSection() {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [sortBy, setSortBy] = useState<SortOption>('recent');
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState('Prompt Copied!');
   const [loginOpen, setLoginOpen] = useState(false);
@@ -39,10 +55,16 @@ export default function AllFiltersSection() {
     return null;
   };
 
-  const filteredAll =
-    activeFilter === 'All'
-      ? prompts
-      : prompts.filter((p) => p.badge === badgeForFilter(activeFilter));
+  const isSavedView = activeFilter === 'Saved';
+
+  const filteredAll = sortPrompts(
+    isSavedView
+      ? []
+      : activeFilter === 'All'
+        ? prompts
+        : prompts.filter((p) => p.badge === badgeForFilter(activeFilter)),
+    sortBy,
+  );
 
   return (
     <>
@@ -56,30 +78,55 @@ export default function AllFiltersSection() {
         </p>
 
         <div className={styles.filterRow}>
-          {filterCategories.map((cat) => (
+          <div className={styles.filterGroup}>
+            {filterCategories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                data-theme={FILTER_THEME[cat]}
+                onClick={() => setActiveFilter(cat)}
+                className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterActive : ''}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          <div className={styles.filterActions}>
+            <SortDropdown value={sortBy} onChange={setSortBy} />
             <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterActive : ''}`}
+              type="button"
+              data-theme="saved"
+              onClick={() => setActiveFilter('Saved')}
+              className={`${styles.filterBtn} ${activeFilter === 'Saved' ? styles.filterActive : ''}`}
             >
-              {cat}
+              Saved
             </button>
-          ))}
+          </div>
         </div>
 
-        <div className={styles.cardsGrid}>
-          {filteredAll.map((p) => (
-            <PromptCard
-              key={p.id}
-              prompt={p}
-              copiesRemaining={copiesRemaining}
-              isCopyLocked={isCopyLocked}
-              onCopy={handleCopy}
-              onRequireLogin={() => setLoginOpen(true)}
-              onLinkCopied={() => notify('Link copied!')}
-            />
-          ))}
-        </div>
+        {isSavedView ? (
+          <div className={styles.emptyState}>
+            <p className={styles.emptyTitle}>No saved prompts yet</p>
+            <p className={styles.emptySub}>
+              Save prompts from any card to find them here. Your saved library will appear once
+              you&apos;re signed in.
+            </p>
+          </div>
+        ) : (
+          <div className={styles.cardsGrid}>
+            {filteredAll.map((p) => (
+              <PromptCard
+                key={p.id}
+                prompt={p}
+                copiesRemaining={copiesRemaining}
+                isCopyLocked={isCopyLocked}
+                onCopy={handleCopy}
+                onRequireLogin={() => setLoginOpen(true)}
+                onLinkCopied={() => notify('Link copied!')}
+              />
+            ))}
+          </div>
+        )}
       </section>
 
       <Toast visible={toastVisible} message={toastMessage} />

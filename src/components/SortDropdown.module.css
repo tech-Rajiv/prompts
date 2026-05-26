@@ -1,0 +1,119 @@
+.root {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(10, 14, 31, 0.6);
+  color: var(--text);
+  border: 1px solid rgba(136, 146, 176, 0.35);
+  padding: 0.5rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  min-width: 0;
+}
+
+.trigger:hover,
+.triggerOpen {
+  border-color: var(--neon);
+  color: var(--neon);
+  box-shadow: 0 0 12px rgba(0, 245, 196, 0.12);
+}
+
+.sortIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.chevron {
+  width: 8px;
+  height: 5px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 200px;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: var(--bg3);
+  border: 1px solid rgba(0, 245, 196, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(0, 245, 196, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.55);
+  z-index: 50;
+  animation: menuIn 0.15s ease both;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.75rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  padding: 0.55rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.option:hover {
+  background: rgba(0, 245, 196, 0.08);
+  border-color: rgba(0, 245, 196, 0.2);
+  color: var(--neon);
+}
+
+.optionSelected {
+  color: var(--neon);
+  background: rgba(0, 245, 196, 0.06);
+}
+
+.optionSelected:hover {
+  background: rgba(0, 245, 196, 0.1);
+}
+
+.optionLabel {
+  flex: 1;
+}
+
+.check {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--neon);
+}

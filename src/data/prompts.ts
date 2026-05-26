@@ -233,3 +233,52 @@ export const BADGE_LABELS: Record<PromptBadge, string> = {
   'editors-pick': "✦ Editor's Pick",
   premium: '👑 Premium',
 };
+
+export type SortOption = 'recent' | 'most-liked' | 'most-commented' | 'oldest' | 'title-az';
+
+export const sortOptions: { value: SortOption; label: string }[] = [
+  { value: 'recent', label: 'Recently Added' },
+  { value: 'most-liked', label: 'Most Liked' },
+  { value: 'most-commented', label: 'Most Commented' },
+  { value: 'oldest', label: 'Oldest First' },
+  { value: 'title-az', label: 'Title A–Z' },
+];
+
+const MOCK_LIKES = ['2.4k', '1.8k', '956', '3.1k', '427', '2k', '1.2k', '640', '890'];
+const MOCK_COMMENTS = ['186', '94', '2k', '52', '310', '88', '145', '402', '67'];
+
+function parseEngagementCount(value: string): number {
+  const v = value.trim().toLowerCase();
+  if (v.endsWith('k')) return parseFloat(v) * 1000;
+  return parseFloat(v) || 0;
+}
+
+export function getPromptEngagement(id: number) {
+  const i = (id - 1) % MOCK_LIKES.length;
+  return {
+    likes: parseEngagementCount(MOCK_LIKES[i]),
+    comments: parseEngagementCount(MOCK_COMMENTS[i]),
+  };
+}
+
+export function sortPrompts(list: Prompt[], sortBy: SortOption): Prompt[] {
+  const sorted = [...list];
+  switch (sortBy) {
+    case 'recent':
+      return sorted.sort((a, b) => b.id - a.id);
+    case 'oldest':
+      return sorted.sort((a, b) => a.id - b.id);
+    case 'most-liked':
+      return sorted.sort(
+        (a, b) => getPromptEngagement(b.id).likes - getPromptEngagement(a.id).likes,
+      );
+    case 'most-commented':
+      return sorted.sort(
+        (a, b) => getPromptEngagement(b.id).comments - getPromptEngagement(a.id).comments,
+      );
+    case 'title-az':
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+    default:
+      return sorted;
+  }
+}

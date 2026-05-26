@@ -8,9 +8,25 @@
 
 .filterRow {
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
+}
+
+.filterGroup {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filterActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .filterBtn {
@@ -26,15 +42,99 @@
   transition: all 0.2s;
 }
 
-.filterBtn:hover {
+/* All — cyan */
+.filterBtn[data-theme='all']:hover:not(.filterActive) {
   border-color: var(--neon);
   color: var(--neon);
 }
 
-.filterActive {
-  background: var(--neon) !important;
-  color: #000 !important;
-  border-color: var(--neon) !important;
+.filterBtn.filterActive[data-theme='all'] {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #000;
+}
+
+/* Trending — pink */
+.filterBtn[data-theme='trending']:hover:not(.filterActive) {
+  border-color: var(--neon3);
+  color: var(--neon3);
+}
+
+.filterBtn.filterActive[data-theme='trending'] {
+  background: var(--neon3);
+  border-color: var(--neon3);
+  color: #000;
+}
+
+/* Popular — purple */
+.filterBtn[data-theme='popular']:hover:not(.filterActive) {
+  border-color: var(--neon2);
+  color: var(--neon2);
+}
+
+.filterBtn.filterActive[data-theme='popular'] {
+  background: var(--neon2);
+  border-color: var(--neon2);
+  color: #000;
+}
+
+/* Editor's Pick — cyan */
+.filterBtn[data-theme='editors']:hover:not(.filterActive) {
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+.filterBtn.filterActive[data-theme='editors'] {
+  background: var(--neon);
+  border-color: var(--neon);
+  color: #000;
+}
+
+/* Premium — gold */
+.filterBtn[data-theme='premium']:hover:not(.filterActive) {
+  border-color: #ffc850;
+  color: #ffc850;
+}
+
+.filterBtn.filterActive[data-theme='premium'] {
+  background: linear-gradient(135deg, #ffc850, #ff9a3c);
+  border-color: #ffc850;
+  color: #1a1008;
+}
+
+/* Saved — purple (same as Popular) */
+.filterBtn[data-theme='saved']:hover:not(.filterActive) {
+  border-color: var(--neon2);
+  color: var(--neon2);
+}
+
+.filterBtn.filterActive[data-theme='saved'] {
+  background: var(--neon2);
+  border-color: var(--neon2);
+  color: #000;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1px dashed rgba(136, 146, 176, 0.25);
+  background: rgba(10, 14, 31, 0.4);
+}
+
+.emptyTitle {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.emptySub {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .cardsGrid {
