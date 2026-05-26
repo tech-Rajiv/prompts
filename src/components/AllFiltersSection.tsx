@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { prompts, categories } from '@/data/prompts';
+import { prompts, filterCategories, type PromptBadge } from '@/data/prompts';
 import { useGuestCopyLimit } from '@/hooks/useGuestCopyLimit';
 import LoginModal from './LoginModal';
 import PromptCard from './PromptCard';
@@ -31,8 +31,18 @@ export default function AllFiltersSection() {
     setTimeout(() => setToastVisible(false), 2200);
   };
 
+  const badgeForFilter = (label: string): PromptBadge | null => {
+    if (label === 'Trending') return 'trending';
+    if (label === 'Popular') return 'popular';
+    if (label === "Editor's Pick") return 'editors-pick';
+    if (label === 'Premium') return 'premium';
+    return null;
+  };
+
   const filteredAll =
-    activeFilter === 'All' ? prompts : prompts.filter((p) => p.category === activeFilter);
+    activeFilter === 'All'
+      ? prompts
+      : prompts.filter((p) => p.badge === badgeForFilter(activeFilter));
 
   return (
     <>
@@ -42,11 +52,11 @@ export default function AllFiltersSection() {
           Complete Library
         </h2>
         <p className="section-sub" style={{ marginBottom: '2rem' }}>
-          Filter by tool, style, or effect. Find exactly what you need.
+          Browse by badge — trending, popular, editor picks, and premium prompts.
         </p>
 
         <div className={styles.filterRow}>
-          {categories.map((cat) => (
+          {filterCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}

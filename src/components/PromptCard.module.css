@@ -12,18 +12,44 @@
   transform: translateY(-4px);
 }
 
-.trendingTag {
+.badgeTag {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: var(--neon3);
-  color: #000;
   font-size: 0.5rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   padding: 3px 8px;
   z-index: 5;
+}
+
+.badge_trending {
+  background: var(--neon3);
+  color: #000;
+}
+
+.badge_popular {
+  background: var(--neon2);
+  color: #000;
+}
+
+.badge_editors-pick {
+  background: var(--neon);
+  color: #000;
+}
+
+.badge_premium {
+  background: linear-gradient(135deg, #ffc850, #ff9a3c);
+  color: #1a1008;
+}
+
+.cardPremium {
+  border-color: rgba(255, 200, 80, 0.2);
+}
+
+.cardPremium:hover {
+  border-color: rgba(255, 200, 80, 0.45);
 }
 
 .cardImg {
@@ -87,6 +113,52 @@
 
 .card:hover .overlay {
   opacity: 1;
+}
+
+.overlayPremium {
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.premiumHover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffc850;
+  font-family: inherit;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.premiumHover:hover {
+  transform: scale(1.04);
+}
+
+.premiumIcon {
+  width: 40px;
+  height: 40px;
+  color: #ffc850;
+  filter: drop-shadow(0 0 12px rgba(255, 200, 80, 0.45));
+}
+
+.premiumLabel {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.premiumHint {
+  font-size: 0.55rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .overlayTag {
@@ -258,6 +330,10 @@
   font-size: 0.6rem;
   color: var(--neon3);
   letter-spacing: 0.5px;
+}
+
+.cardFirePremium {
+  color: #ffc850;
 }
 
 .engagement {

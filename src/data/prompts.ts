@@ -1,8 +1,11 @@
+export type PromptBadge = 'trending' | 'popular' | 'editors-pick' | 'premium';
+
 export type Prompt = {
   id: number;
   title: string;
   tool: string;
   category: string;
+  badge: PromptBadge;
   trending: boolean;
   prompt: string;
   before: string;
@@ -34,6 +37,7 @@ export const prompts: Prompt[] = [
     title: 'Cyberpunk Portrait',
     tool: 'Midjourney',
     category: 'Portrait',
+    badge: 'trending',
     trending: true,
     prompt:
       'Cinematic cyberpunk portrait, neon rim lighting, rain bokeh, holographic tattoos, dark street background, 8k hyperrealistic, --ar 2:3 --style raw --v 6',
@@ -49,6 +53,7 @@ export const prompts: Prompt[] = [
     title: 'Anime Filter',
     tool: 'DALL·E 3',
     category: 'Style Transfer',
+    badge: 'trending',
     trending: true,
     prompt:
       'Convert to anime art style, Studio Ghibli inspired, soft watercolor textures, dreamy sky background, warm golden hour lighting, highly detailed illustration',
@@ -64,6 +69,7 @@ export const prompts: Prompt[] = [
     title: 'Y2K Glitch',
     tool: 'Stable Diffusion',
     category: 'Glitch Art',
+    badge: 'popular',
     trending: false,
     prompt:
       'Y2K aesthetic glitch art, VHS distortion effect, chromatic aberration, holographic stickers overlay, early 2000s digital aesthetic, pixel corruption artifacts, neon pink and cyan',
@@ -79,7 +85,8 @@ export const prompts: Prompt[] = [
     title: 'Neon Deity',
     tool: 'Midjourney',
     category: 'Concept Art',
-    trending: true,
+    badge: 'editors-pick',
+    trending: false,
     prompt:
       'Ancient deity reimagined in neon light sculpture, floating in void, sacred geometry, bioluminescent patterns, ultra-detailed, cinematic, --ar 1:1 --style expressive --chaos 20',
     before: 'Concept Sketch',
@@ -94,6 +101,7 @@ export const prompts: Prompt[] = [
     title: 'Liquid Chrome',
     tool: 'Adobe Firefly',
     category: 'Abstract',
+    badge: 'premium',
     trending: false,
     prompt:
       'Liquid mercury portrait, chrome skin texture, reflective surface, dramatic studio lighting, high contrast black background, hyperrealistic 3D render, octane render quality',
@@ -109,6 +117,7 @@ export const prompts: Prompt[] = [
     title: 'Vaporwave Dream',
     tool: 'Midjourney',
     category: 'Style Transfer',
+    badge: 'trending',
     trending: true,
     prompt:
       'Vaporwave aesthetic portrait, pink and purple gradient sky, retro grid floor, palm trees silhouette, roman bust statue, lo-fi grain texture, 80s retro futurism, --ar 1:1 --v 6',
@@ -124,6 +133,7 @@ export const prompts: Prompt[] = [
     title: 'Dark Academia',
     tool: 'DALL·E 3',
     category: 'Portrait',
+    badge: 'premium',
     trending: false,
     prompt:
       'Dark academia aesthetic portrait, moody library background, candlelight, vintage oil painting texture, muted earth tones, classical composition, introspective mood, highly detailed',
@@ -139,6 +149,7 @@ export const prompts: Prompt[] = [
     title: 'Biopunk Creature',
     tool: 'Stable Diffusion',
     category: 'Concept Art',
+    badge: 'premium',
     trending: false,
     prompt:
       'Biopunk creature design, organic cybernetic hybrid, bioluminescent veins, translucent skin revealing mechanical parts, dark wet environment, cinematic horror lighting, ultra detailed, artstation trending',
@@ -214,4 +225,11 @@ export const ytPrompts: YTPrompt[] = [
   },
 ];
 
-export const categories = ['All', 'Portrait', 'Style Transfer', 'Glitch Art', 'Concept Art', 'Abstract'];
+export const filterCategories = ['All', 'Trending', 'Popular', "Editor's Pick", 'Premium'] as const;
+
+export const BADGE_LABELS: Record<PromptBadge, string> = {
+  trending: '🔥 Trending',
+  popular: '⭐ Popular',
+  'editors-pick': "✦ Editor's Pick",
+  premium: '👑 Premium',
+};
