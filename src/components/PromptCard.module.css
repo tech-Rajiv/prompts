@@ -118,6 +118,10 @@
 
 .copyBtn {
   flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   background: var(--neon);
   color: #000;
   border: none;
@@ -133,6 +137,51 @@
 
 .copyBtn:hover {
   background: #00c9a4;
+}
+
+.copyCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.55rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.copyLockedBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(0, 245, 196, 0.12);
+  color: var(--neon);
+  border: 1px dashed rgba(0, 245, 196, 0.45);
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.copyLockedBtn:hover {
+  background: rgba(0, 245, 196, 0.22);
+  border-color: var(--neon);
+  color: #fff;
+}
+
+.lockIcon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
 }
 
 .viewBtn {
@@ -152,6 +201,31 @@
 .viewBtn:hover {
   background: var(--neon2);
   color: #000;
+}
+
+.viewLockedBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(180, 100, 255, 0.1);
+  color: var(--neon2);
+  border: 1px dashed rgba(180, 100, 255, 0.45);
+  padding: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.viewLockedBtn:hover {
+  background: rgba(180, 100, 255, 0.2);
+  border-color: var(--neon2);
+  color: #fff;
 }
 
 /* CARD FOOTER */

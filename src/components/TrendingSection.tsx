@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { prompts } from "@/data/prompts";
 import { useState } from "react";
+import { useGuestCopyLimit } from "@/hooks/useGuestCopyLimit";
 import LoginModal from "./LoginModal";
 import PromptCard from "./PromptCard";
 import Toast from "./Toast";
@@ -12,12 +13,16 @@ export default function TrendingSection() {
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("Prompt Copied!");
   const [loginOpen, setLoginOpen] = useState(false);
+  const { copiesRemaining, isCopyLocked, tryCopy } = useGuestCopyLimit();
 
-  const showToast = (text: string, message = "Prompt Copied!") => {
-    navigator.clipboard?.writeText(text).catch(() => {});
+  const showToast = (_text: string, message = "Prompt Copied!") => {
     setToastMessage(message);
     setToastVisible(true);
     setTimeout(() => setToastVisible(false), 2200);
+  };
+
+  const handleCopy = (text: string) => {
+    tryCopy(text, showToast, () => setLoginOpen(true));
   };
 
   const notify = (message: string) => {
@@ -46,7 +51,9 @@ export default function TrendingSection() {
             <PromptCard
               key={p.id}
               prompt={p}
-              onCopy={showToast}
+              copiesRemaining={copiesRemaining}
+              isCopyLocked={isCopyLocked}
+              onCopy={handleCopy}
               onRequireLogin={() => setLoginOpen(true)}
               onLinkCopied={() => notify("Link copied!")}
             />

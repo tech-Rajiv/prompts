@@ -6,6 +6,8 @@ import styles from './PromptCard.module.css';
 
 interface Props {
   prompt: Prompt;
+  copiesRemaining: number;
+  isCopyLocked: boolean;
   onCopy: (text: string) => void;
   onRequireLogin?: () => void;
   onLinkCopied?: () => void;
@@ -17,6 +19,20 @@ const COMMENTS = ['186', '94', '2k', '52', '310', '88', '145', '402', '67'];
 function getEngagement(id: number) {
   const i = (id - 1) % LIKES.length;
   return { likes: LIKES[i], comments: COMMENTS[i] };
+}
+
+function LockIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 16 16" fill="none" aria-hidden>
+      <rect x="3.5" y="7" width="9" height="6.5" rx="1" stroke="currentColor" strokeWidth="1.2" />
+      <path
+        d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 async function sharePrompt(p: Prompt, onLinkCopied?: () => void) {
@@ -44,10 +60,33 @@ async function sharePrompt(p: Prompt, onLinkCopied?: () => void) {
   }
 }
 
-export default function PromptCard({ prompt: p, onCopy, onRequireLogin, onLinkCopied }: Props) {
+export default function PromptCard({
+  prompt: p,
+  copiesRemaining,
+  isCopyLocked,
+  onCopy,
+  onRequireLogin,
+  onLinkCopied,
+}: Props) {
   const { likes, comments } = getEngagement(p.id);
 
   const stopPropagation = (e: MouseEvent) => e.stopPropagation();
+
+  const handleCopyClick = () => {
+    if (isCopyLocked) {
+      onRequireLogin?.();
+      return;
+    }
+    onCopy(p.prompt);
+  };
+
+  const handleViewClick = () => {
+    if (isCopyLocked) {
+      onRequireLogin?.();
+      return;
+    }
+    // Detail page navigation will be wired here
+  };
 
   return (
     <div className={styles.card}>
@@ -94,12 +133,37 @@ export default function PromptCard({ prompt: p, onCopy, onRequireLogin, onLinkCo
           <div className={styles.overlayTag}>{p.category}</div>
           <div className={styles.overlayPrompt}>{p.prompt}</div>
           <div className={styles.overlayActions}>
-            <button className={styles.copyBtn} onClick={() => onCopy(p.prompt)}>
-              Copy Prompt
-            </button>
-            <button type="button" className={styles.viewBtn}>
-              View
-            </button>
+            {isCopyLocked ? (
+              <button
+                type="button"
+                className={styles.copyLockedBtn}
+                onClick={handleCopyClick}
+                aria-label="Sign in to copy more prompts"
+              >
+                <LockIcon className={styles.lockIcon} />
+                Copy Prompt
+              </button>
+            ) : (
+              <button type="button" className={styles.copyBtn} onClick={handleCopyClick}>
+                Copy Prompt
+                <span className={styles.copyCount}>{copiesRemaining}</span>
+              </button>
+            )}
+            {isCopyLocked ? (
+              <button
+                type="button"
+                className={styles.viewLockedBtn}
+                onClick={handleViewClick}
+                aria-label="Sign in to view prompt details"
+              >
+                <LockIcon className={styles.lockIcon} />
+                View
+              </button>
+            ) : (
+              <button type="button" className={styles.viewBtn} onClick={handleViewClick}>
+                View
+              </button>
+            )}
           </div>
         </div>
       </div>
