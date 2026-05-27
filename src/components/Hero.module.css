@@ -61,7 +61,7 @@
   /* heading */
   .heading {
     font-family: var(--font-head);
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    font-size: clamp(2.35rem, 4.5vw, 3.9rem);
     font-weight: 800;
     line-height: 1.04;
     letter-spacing: -2.5px;
@@ -164,7 +164,7 @@
   /* ── RIGHT — cards container ── */
   .cards {
     position: relative;
-    height: 380px;
+    height: 400px;
     animation: fadeUp 0.5s 0.2s ease both;
     opacity: 0;
     animation-fill-mode: forwards;
@@ -267,46 +267,46 @@
   
   /* Card 1 — top-left, leans left, mid z */
   .c1 {
-    width: 190px;
+    width: 198px;
     top: 0px;
     left: 8px;
     transform: rotate(-5deg);
     z-index: 3;
   }
-  .c1 .cardImg { height: 220px; }
+  .c1 .cardImg { height: 228px; }
   .c1:hover { transform: rotate(-5deg) translateY(-6px); }
   
   /* Card 2 — top-right, leans right, back z */
   .c2 {
-    width: 175px;
+    width: 183px;
     top: 18px;
-    left: 155px;
+    left: 159px;
     transform: rotate(4deg);
     z-index: 2;
   }
-  .c2 .cardImg { height: 200px; }
+  .c2 .cardImg { height: 208px; }
   .c2:hover { transform: rotate(4deg) translateY(-6px); }
   
   /* Card 3 — centre, barely tilted, front z */
   .c3 {
-    width: 185px;
+    width: 193px;
     top: 120px;
     left: 65px;
     transform: rotate(-1.5deg);
     z-index: 5;
   }
-  .c3 .cardImg { height: 195px; }
+  .c3 .cardImg { height: 203px; }
   .c3:hover { transform: rotate(-1.5deg) translateY(-6px); }
   
   /* Card 4 — bottom-right, leans right, lowest z */
   .c4 {
-    width: 165px;
+    width: 173px;
     top: 160px;
-    left: 215px;
+    left: 219px;
     transform: rotate(3deg);
     z-index: 1;
   }
-  .c4 .cardImg { height: 180px; }
+  .c4 .cardImg { height: 188px; }
   .c4:hover { transform: rotate(3deg) translateY(-6px); }
   
   /* ── animations ── */
@@ -317,32 +317,84 @@
   
   /* ── responsive ── */
   @media (max-width: 900px) {
+    .hero {
+      align-items: flex-start;
+      padding-top: 6rem;
+    }
+
     .inner {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
-  
+
+    /* images on top, copy below */
     .cards {
+      order: -1;
+      width: min(100%, 310px);
       height: 300px;
-      max-width: 400px;
-      margin: 0 auto;
+      margin: 0 auto 0.5rem;
+      flex-shrink: 0;
     }
-  
-    /* scale cards down a touch on mobile */
-    .c1 { width: 155px; left: 0; }
-    .c1 .cardImg { height: 175px; }
-  
-    .c2 { width: 145px; left: 120px; }
-    .c2 .cardImg { height: 160px; }
-  
-    .c3 { width: 155px; left: 50px; top: 100px; }
-    .c3 .cardImg { height: 155px; }
-  
-    .c4 { width: 140px; left: 178px; top: 130px; }
-    .c4 .cardImg { height: 145px; }
+
+    .left {
+      order: 1;
+      width: 100%;
+    }
+
+    .heading {
+      font-size: clamp(2rem, 7vw, 2.75rem);
+      letter-spacing: -1.8px;
+    }
+
+    .sub {
+      max-width: 100%;
+    }
+
+    /* centered cluster — fits within 310px */
+    .c1 { width: 168px; left: 4px; top: 0; }
+    .c1 .cardImg { height: 188px; }
+
+    .c2 { width: 158px; left: 118px; top: 14px; }
+    .c2 .cardImg { height: 172px; }
+
+    .c3 { width: 168px; left: 52px; top: 98px; }
+    .c3 .cardImg { height: 168px; }
+
+    .c4 { width: 158px; left: 152px; top: 128px; }
+    .c4 .cardImg { height: 158px; }
   }
-  
+
   @media (max-width: 520px) {
-    .hero { padding: 6rem 1.25rem 3rem; }
-    .stats { gap: 1.5rem; }
-    .heading { letter-spacing: -1.5px; }
+    .hero {
+      padding: 5.5rem 1.25rem 3rem;
+      overflow-x: clip;
+    }
+
+    .cards {
+      width: min(100%, 290px);
+      height: 285px;
+    }
+
+    .stats {
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .heading {
+      font-size: clamp(1.75rem, 7.5vw, 2.35rem);
+      letter-spacing: -1.2px;
+    }
+
+    .c1 { width: 162px; left: 2px; }
+    .c1 .cardImg { height: 182px; }
+
+    .c2 { width: 152px; left: 108px; }
+    .c2 .cardImg { height: 166px; }
+
+    .c3 { width: 162px; left: 44px; top: 94px; }
+    .c3 .cardImg { height: 162px; }
+
+    .c4 { width: 152px; left: 136px; top: 122px; }
+    .c4 .cardImg { height: 152px; }
   }
