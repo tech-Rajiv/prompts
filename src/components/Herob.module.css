@@ -1,30 +1,32 @@
 /* ================================
-   Hero.module.css — Variant A
-   Floating Cards · PromptForYou
+   HeroB.module.css — Variant B
+   Centred text + Carousel
+   PromptForYou
    ================================ */
 
    .hero {
     position: relative;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 7rem 2rem 4rem;
+    justify-content: center;
     z-index: 1;
     overflow: hidden;
+    padding-bottom: 0;
   }
   
-  /* two-column grid */
-  .inner {
-    max-width: 1200px;
-    margin: 0 auto;
+  /* ── TOP TEXT BLOCK ── */
+  .top {
+    text-align: center;
+    padding: 8rem 2rem 3.5rem;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 4rem;
-    align-items: center;
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
   
-  /* ── LEFT ── */
   /* badge */
   .badge {
     display: inline-flex;
@@ -59,10 +61,10 @@
   /* heading */
   .heading {
     font-family: var(--font-head);
-    font-size: clamp(2.35rem, 4.5vw, 3.9rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 800;
     line-height: 1.04;
-    letter-spacing: -2.5px;
+    letter-spacing: -3px;
     margin-bottom: 1.25rem;
     animation: fadeUp 0.5s 0.1s ease both;
     opacity: 0;
@@ -77,8 +79,8 @@
     color: var(--muted);
     font-size: 0.78rem;
     line-height: 2;
-    max-width: 440px;
-    margin-bottom: 2rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
     animation: fadeUp 0.5s 0.18s ease both;
     opacity: 0;
     animation-fill-mode: forwards;
@@ -88,6 +90,7 @@
   .buttons {
     display: flex;
     gap: 12px;
+    justify-content: center;
     flex-wrap: wrap;
     margin-bottom: 2.5rem;
     animation: fadeUp 0.5s 0.26s ease both;
@@ -135,13 +138,14 @@
   /* stats */
   .stats {
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
+    justify-content: center;
     animation: fadeUp 0.5s 0.34s ease both;
     opacity: 0;
     animation-fill-mode: forwards;
   }
   
-  .stat { text-align: left; }
+  .stat { text-align: center; }
   
   .statNum {
     font-family: var(--font-head);
@@ -159,34 +163,82 @@
     margin-top: 4px;
   }
   
-  /* ── RIGHT — cards container ── */
-  .cards {
-    position: relative;
-    height: 400px;
-    animation: fadeUp 0.5s 0.2s ease both;
+  /* ── CAROUSEL WRAPPER ── */
+  .carouselWrap {
+    width: 100%;
+    border-top: 1px solid rgba(0, 245, 196, 0.08);
+    background: rgba(8, 13, 26, 0.6);
+    padding-bottom: 2rem;
+    animation: fadeUp 0.5s 0.4s ease both;
     opacity: 0;
     animation-fill-mode: forwards;
   }
   
+  .carouselLabel {
+    text-align: center;
+    font-size: 0.52rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 16px 0 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  
+  /* track container — clips overflow */
+  .trackOuter {
+    overflow: hidden;
+    padding: 28px 48px 20px;
+    position: relative;
+  }
+  
+  /* fade edges */
+  .fadeLeft,
+  .fadeRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .fadeLeft {
+    left: 0;
+    background: linear-gradient(to right, rgba(8, 13, 26, 0.9), transparent);
+  }
+  
+  .fadeRight {
+    right: 0;
+    background: linear-gradient(to left, rgba(8, 13, 26, 0.9), transparent);
+  }
+  
+  /* sliding track */
+  .track {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  
   /* ── individual card ── */
   .card {
-    position: absolute;
-    background: rgba(12, 18, 37, 0.92);
+    flex-shrink: 0;
+    width: 236px;
+    background: rgba(12, 18, 37, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.07);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
   }
   
   .card:hover {
     border-color: rgba(0, 245, 196, 0.4);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-    z-index: 10 !important;
+    transform: translateY(-4px);
   }
   
-  /* card image area */
+  /* card image */
   .cardImg {
-    width: 100%;
+    height: 150px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -194,30 +246,29 @@
     justify-content: center;
   }
   
-  /* placeholder — remove once you add real images */
+  /* placeholder — remove once real images are in */
   .placeholder {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* subtle dot grid */
     background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
     background-size: 14px 14px;
   }
   
   .placeholderHint {
-    font-size: 0.48rem;
+    font-size: 0.46rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(136, 146, 176, 0.3);
     background: rgba(5, 8, 16, 0.6);
     padding: 4px 10px;
-    border: 1px solid rgba(0, 245, 196, 0.1);
+    border: 1px solid rgba(0, 245, 196, 0.08);
   }
   
-  /* 🔥 hot badge */
-  .fireTag {
+  /* hot tag */
+  .hotTag {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -228,195 +279,157 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 3px 7px;
+    z-index: 4;
+  }
+  
+  /* hover copy overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 16, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
     z-index: 5;
+  }
+  
+  .card:hover .overlay {
+    opacity: 1;
+  }
+  
+  .copyBtn {
+    background: var(--neon);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  
+  .copyBtn:hover {
+    background: #00c9a4;
   }
   
   /* card footer */
   .cardInfo {
-    padding: 8px 12px;
+    padding: 10px 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .cardTitle {
+    font-family: var(--font-head);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .cardMeta {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
   
-  .cardTitle {
-    font-family: var(--font-head);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--text);
-  }
-  
   .cardTool {
     font-size: 0.48rem;
-    color: var(--neon);
+    color: var(--muted);
     letter-spacing: 1px;
     text-transform: uppercase;
   }
   
-  /* ── placeholder background colours ── */
-  /* swap these out or just let the image cover them */
+  .cardHot {
+    font-size: 0.48rem;
+    color: var(--neon3);
+  }
+  
+  /* card placeholder backgrounds */
   .p1 { background: linear-gradient(135deg, #06091a 0%, #0c0520 100%); }
   .p2 { background: linear-gradient(135deg, #090618 0%, #15062a 100%); }
   .p3 { background: linear-gradient(135deg, #08100a 0%, #031408 100%); }
   .p4 { background: linear-gradient(135deg, #180a14 0%, #0a0318 100%); }
+  .p5 { background: linear-gradient(135deg, #1a0e00 0%, #180800 100%); }
+  .p6 { background: linear-gradient(135deg, #041018 0%, #061a24 100%); }
   
-  /* ── card positions & rotations ── */
-  
-  /* Card 1 — top-left, leans left, mid z */
-  .c1 {
-    width: 198px;
-    top: 0px;
-    left: 8px;
-    transform: rotate(-5deg);
-    z-index: 3;
+  /* ── NAVIGATION ── */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 4px;
   }
-  .c1 .cardImg { height: 228px; }
-  .c1:hover { transform: rotate(-5deg) translateY(-6px); }
   
-  /* Card 2 — top-right, leans right, back z */
-  .c2 {
-    width: 183px;
-    top: 18px;
-    left: 159px;
-    transform: rotate(4deg);
-    z-index: 2;
+  .navBtn {
+    background: transparent;
+    border: 1px solid rgba(0, 245, 196, 0.2);
+    color: var(--neon);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .c2 .cardImg { height: 208px; }
-  .c2:hover { transform: rotate(4deg) translateY(-6px); }
   
-  /* Card 3 — centre, barely tilted, front z */
-  .c3 {
-    width: 193px;
-    top: 120px;
-    left: 65px;
-    transform: rotate(-1.5deg);
-    z-index: 5;
+  .navBtn:hover:not(:disabled) {
+    background: var(--neon);
+    color: #000;
   }
-  .c3 .cardImg { height: 203px; }
-  .c3:hover { transform: rotate(-1.5deg) translateY(-6px); }
   
-  /* Card 4 — bottom-right, leans right, lowest z */
-  .c4 {
-    width: 173px;
-    top: 160px;
-    left: 219px;
-    transform: rotate(3deg);
-    z-index: 1;
+  .navBtn:disabled {
+    opacity: 0.25;
+    cursor: default;
   }
-  .c4 .cardImg { height: 188px; }
-  .c4:hover { transform: rotate(3deg) translateY(-6px); }
+  
+  /* dots */
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 245, 196, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+  }
+  
+  .dotOn {
+    background: var(--neon);
+    width: 20px;
+  }
   
   /* ── animations ── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   
   /* ── responsive ── */
-  @media (max-width: 900px) {
-    .hero {
-      align-items: flex-start;
-      padding-top: 6rem;
-    }
-
-    .inner {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    /* images on top, copy below */
-    .cards {
-      order: -1;
-      width: min(100%, 310px);
-      height: 300px;
-      margin: 0 auto 0.5rem;
-      flex-shrink: 0;
-      padding-top: 34px;
-    }
-
-    .cards::before {
-      content: "Trending now";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 26px;
-      padding: 0 12px;
-      border: 1px solid rgba(0, 245, 196, 0.25);
-      background: rgba(0, 245, 196, 0.06);
-      color: var(--neon);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    .left {
-      order: 1;
-      width: 100%;
-    }
-
-    .heading {
-      font-size: clamp(2rem, 7vw, 2.75rem);
-      letter-spacing: -1.8px;
-    }
-
-    .sub {
-      max-width: 100%;
-    }
-
-    /* centered cluster — fits within 310px */
-    .c1 { width: 168px; left: 4px; top: 0; }
-    .c1 .cardImg { height: 188px; }
-
-    .c2 { width: 158px; left: 118px; top: 14px; }
-    .c2 .cardImg { height: 172px; }
-
-    .c3 { width: 168px; left: 52px; top: 98px; }
-    .c3 .cardImg { height: 168px; }
-
-    .c4 { width: 158px; left: 152px; top: 128px; }
-    .c4 .cardImg { height: 158px; }
+  @media (max-width: 768px) {
+    .heading { letter-spacing: -2px; }
+    .stats   { gap: 2rem; }
+    .trackOuter { padding: 24px 24px 16px; }
+    .card { width: 200px; }
   }
-
-  @media (max-width: 520px) {
-    .hero {
-      padding: 5.5rem 1.25rem 3rem;
-      overflow-x: clip;
-    }
-
-    .cards {
-      width: min(100%, 290px);
-      height: 285px;
-      padding-top: 34px;
-    }
-
-    .stats {
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .heading {
-      font-size: clamp(1.75rem, 7.5vw, 2.35rem);
-      letter-spacing: -1.2px;
-    }
-
-    .c1 { width: 162px; left: 2px; }
-    .c1 .cardImg { height: 182px; }
-
-    .c2 { width: 152px; left: 108px; }
-    .c2 .cardImg { height: 166px; }
-
-    .c3 { width: 162px; left: 44px; top: 94px; }
-    .c3 .cardImg { height: 162px; }
-
-    .c4 { width: 152px; left: 136px; top: 122px; }
-    .c4 .cardImg { height: 152px; }
+  
+  @media (max-width: 480px) {
+    .top { padding: 7rem 1.25rem 2.5rem; }
+    .stats { gap: 1.5rem; }
   }

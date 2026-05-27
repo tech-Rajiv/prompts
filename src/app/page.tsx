@@ -6,13 +6,15 @@ import HowItWorks from "@/components/HowItWorks";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import HeroB from "@/components/Herob";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
+        {/* <Hero /> */}
+        <HeroB />
         <TrendingSection />
         {/* <YTSection /> */}
         <HowItWorks />
