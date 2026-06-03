@@ -99,6 +99,45 @@
   margin-left: 0.75rem;
 }
 
+.profileBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(0, 245, 196, 0.25);
+  color: var(--muted);
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.profileBtn:hover {
+  border-color: var(--neon);
+  color: var(--text);
+}
+
+.profileAvatar,
+.profileAvatarFallback {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profileAvatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 245, 196, 0.12);
+  color: var(--neon);
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
 .navRight {
   display: flex;
   align-items: center;

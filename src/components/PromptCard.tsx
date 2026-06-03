@@ -10,6 +10,8 @@ interface Props {
   prompt: Prompt;
   copiesRemaining: number;
   isCopyLocked: boolean;
+  /** When true (signed-in user), copying is unlimited and the count badge is hidden. */
+  unlimited?: boolean;
   onCopy: (text: string) => void;
   onRequireLogin?: () => void;
   onLinkCopied?: () => void;
@@ -93,6 +95,7 @@ export default function PromptCard({
   prompt: p,
   copiesRemaining,
   isCopyLocked,
+  unlimited = false,
   onCopy,
   onRequireLogin,
   onLinkCopied,
@@ -221,7 +224,9 @@ export default function PromptCard({
                   ) : (
                     <button type="button" className={styles.copyBtn} onClick={handleCopyClick}>
                       Copy Prompt
-                      <span className={styles.copyCount}>{copiesRemaining}</span>
+                      {!unlimited && (
+                        <span className={styles.copyCount}>{copiesRemaining}</span>
+                      )}
                     </button>
                   )}
                   {isCopyLocked ? (

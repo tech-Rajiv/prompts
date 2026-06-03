@@ -102,7 +102,7 @@ export default function HeroB() {
         onMouseLeave={() => setPaused(false)}
       >
         <div className={styles.carouselLabel}>
-          // Trending prompts — hover any card to copy
+          {"// Trending prompts — hover any card to copy"}
         </div>
 
         <div className={styles.trackOuter}>

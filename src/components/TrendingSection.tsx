@@ -13,7 +13,12 @@ export default function TrendingSection() {
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("Prompt Copied!");
   const [loginOpen, setLoginOpen] = useState(false);
-  const { copiesRemaining, isCopyLocked, tryCopy } = useGuestCopyLimit();
+  const { copiesRemaining, isCopyLocked, unlimited, tryCopy } = useGuestCopyLimit();
+
+  // Signed-in users never need the login prompt (copy, like, save, etc.).
+  const requireLogin = () => {
+    if (!unlimited) setLoginOpen(true);
+  };
 
   const showToast = (_text: string, message = "Prompt Copied!") => {
     setToastMessage(message);
@@ -22,7 +27,7 @@ export default function TrendingSection() {
   };
 
   const handleCopy = (text: string) => {
-    tryCopy(text, showToast, () => setLoginOpen(true));
+    tryCopy(text, showToast, requireLogin);
   };
 
   const notify = (message: string) => {
@@ -53,8 +58,9 @@ export default function TrendingSection() {
               prompt={p}
               copiesRemaining={copiesRemaining}
               isCopyLocked={isCopyLocked}
+              unlimited={unlimited}
               onCopy={handleCopy}
-              onRequireLogin={() => setLoginOpen(true)}
+              onRequireLogin={requireLogin}
               onLinkCopied={() => notify("Link copied!")}
             />
           ))}

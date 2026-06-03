@@ -3,17 +3,21 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import LoginModal from "./LoginModal";
+import LogoutModal from "./LogoutModal";
 import styles from "./Navbar.module.css";
 import { lockBodyScroll, unlockBodyScroll } from "@/lib/scrollLock";
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+  const { status, data } = useSession();
   const isAllFilters = pathname === "/all-filters";
   const isAbout = pathname === "/about";
   const [scrolled, setScrolled] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
@@ -119,16 +123,55 @@ export default function Navbar() {
             <span className={styles.mobileToggleBar} />
           </button>
 
-          <button
-            type="button"
-            className={styles.navCta}
-            onClick={() => {
-              setMobileNavOpen(false);
-              setLoginOpen(true);
-            }}
-          >
-            Login
-          </button>
+          {status === "authenticated" ? (
+            <>
+              <Link
+                href="/profile"
+                className={styles.profileBtn}
+                onClick={() => setMobileNavOpen(false)}
+                aria-label="Your profile"
+              >
+                {data?.user?.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    className={styles.profileAvatar}
+                    src={data.user.image}
+                    alt=""
+                  />
+                ) : (
+                  <span className={styles.profileAvatarFallback} aria-hidden>
+                    {(data?.user?.name ?? data?.user?.email ?? "?")
+                      .trim()
+                      .charAt(0)
+                      .toUpperCase()}
+                  </span>
+                )}
+                Profile
+              </Link>
+              <button
+                type="button"
+                className={styles.navCta}
+                onClick={() => {
+                  setMobileNavOpen(false);
+                  setLogoutOpen(true);
+                }}
+                aria-label={`Logout ${data?.user?.email ?? ""}`.trim()}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <button
+              type="button"
+              className={styles.navCta}
+              onClick={() => {
+                setMobileNavOpen(false);
+                setLoginOpen(true);
+              }}
+            >
+              Login
+            </button>
+          )}
         </div>
       </nav>
 
@@ -206,6 +249,11 @@ export default function Navbar() {
       )}
 
       <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
+      <LogoutModal
+        open={logoutOpen}
+        onClose={() => setLogoutOpen(false)}
+        email={data?.user?.email}
+      />
     </>
   );
 }
