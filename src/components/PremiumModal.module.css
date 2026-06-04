@@ -66,14 +66,20 @@
 
 .cta {
   width: 100%;
-  background: rgba(255, 200, 80, 0.15);
-  color: rgba(255, 200, 80, 0.6);
-  border: 1px dashed rgba(255, 200, 80, 0.4);
+  background: #ffc850;
+  color: #050810;
+  border: 1px solid #ffc850;
   padding: 0.75rem 1rem;
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  cursor: not-allowed;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 200, 80, 0.25);
 }

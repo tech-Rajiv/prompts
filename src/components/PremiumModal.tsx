@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { useRouter } from 'next/navigation';
 import { lockBodyScroll, unlockBodyScroll } from '@/lib/scrollLock';
 import styles from './PremiumModal.module.css';
 
@@ -12,10 +13,16 @@ interface Props {
 
 export default function PremiumModal({ open, onClose }: Props) {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const goToSubscription = () => {
+    onClose();
+    router.push('/subscription');
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -54,11 +61,11 @@ export default function PremiumModal({ open, onClose }: Props) {
           Premium Prompt
         </h2>
         <p className={styles.sub}>
-          Subscribe to unlock this prompt and the full premium library. Subscription checkout
-          coming soon.
+          Subscribe to unlock this prompt and the full premium library. Plans start at just
+          $3/month.
         </p>
-        <button type="button" className={styles.cta} disabled>
-          Buy Subscription — Soon
+        <button type="button" className={styles.cta} onClick={goToSubscription}>
+          View Plans →
         </button>
       </div>
     </div>,

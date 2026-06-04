@@ -106,11 +106,19 @@ export default function PromptCard({
 
   const stopPropagation = (e: MouseEvent) => e.stopPropagation();
 
-  const openPremium = () => setPremiumOpen(true);
+  // Premium entry point. Guests must sign in first; signed-in users
+  // (unlimited) see the premium modal, which links to /subscription.
+  const handlePremiumClick = () => {
+    if (!unlimited) {
+      onRequireLogin?.();
+      return;
+    }
+    setPremiumOpen(true);
+  };
 
   const handleCopyClick = () => {
     if (isPremium) {
-      openPremium();
+      handlePremiumClick();
       return;
     }
     if (isCopyLocked) {
@@ -122,7 +130,7 @@ export default function PromptCard({
 
   const handleViewClick = () => {
     if (isPremium) {
-      openPremium();
+      handlePremiumClick();
       return;
     }
     if (isCopyLocked) {
@@ -133,7 +141,7 @@ export default function PromptCard({
   };
 
   const handleCardClick = () => {
-    if (isPremium) openPremium();
+    if (isPremium) handlePremiumClick();
   };
 
   return (
@@ -148,7 +156,7 @@ export default function PromptCard({
             ? (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  openPremium();
+                  handlePremiumClick();
                 }
               }
             : undefined
@@ -199,7 +207,7 @@ export default function PromptCard({
                 className={styles.premiumHover}
                 onClick={(e) => {
                   stopPropagation(e);
-                  openPremium();
+                  handlePremiumClick();
                 }}
               >
                 <CrownIcon className={styles.premiumIcon} />
