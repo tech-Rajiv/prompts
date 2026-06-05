@@ -14,6 +14,10 @@ export type Prompt = {
   colorB: string;
   accentA: string;
   accentB: string;
+  /** Optional per-prompt overrides for the detail page. Fall back to
+   *  sensible tool-derived defaults via getPromptSteps / getPromptPhotoTips. */
+  steps?: string[];
+  photoTips?: string[];
 };
 
 export type YTPrompt = {
@@ -259,6 +263,45 @@ export function getPromptEngagement(id: number) {
     likes: parseEngagementCount(MOCK_LIKES[i]),
     comments: parseEngagementCount(MOCK_COMMENTS[i]),
   };
+}
+
+export function getPromptById(id: number): Prompt | undefined {
+  return prompts.find((p) => p.id === id);
+}
+
+/** Sibling prompts for the "More like this" rail — same badge first, then fill. */
+export function getRelatedPrompts(id: number, limit = 3): Prompt[] {
+  const current = getPromptById(id);
+  if (!current) return [];
+  const sameBadge = prompts.filter((p) => p.id !== id && p.badge === current.badge);
+  const rest = prompts.filter((p) => p.id !== id && p.badge !== current.badge);
+  return [...sameBadge, ...rest].slice(0, limit);
+}
+
+/**
+ * Step-by-step recipe for a prompt. Prefers per-prompt `steps`, otherwise
+ * builds a generic walkthrough keyed off the prompt's AI tool.
+ */
+export function getPromptSteps(p: Prompt): string[] {
+  if (p.steps?.length) return p.steps;
+  return [
+    `Open ${p.tool} — sign in and start a new image generation.`,
+    'Upload or attach your source photo as the reference image.',
+    'Paste the full prompt below into the prompt field exactly as written.',
+    `Generate, then pick the variation that best matches the "${p.after}" look.`,
+    'Upscale your favourite result and download it in the highest available quality.',
+  ];
+}
+
+/** Photography tips so the user's source shot suits this transformation. */
+export function getPromptPhotoTips(p: Prompt): string[] {
+  if (p.photoTips?.length) return p.photoTips;
+  return [
+    'Shoot in soft, even lighting — avoid harsh shadows that confuse the model.',
+    'Keep the subject sharp and centred with a clean, uncluttered background.',
+    'Use the highest resolution you can; more detail gives the AI more to work with.',
+    `Frame the shot to leave room for the ${p.category.toLowerCase()} styling to take over.`,
+  ];
 }
 
 export function sortPrompts(list: Prompt[], sortBy: SortOption): Prompt[] {

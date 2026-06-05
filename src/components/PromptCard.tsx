@@ -2,6 +2,7 @@
 
 import type { MouseEvent } from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Prompt, BADGE_LABELS } from '@/data/prompts';
 import PremiumModal from './PremiumModal';
 import styles from './PromptCard.module.css';
@@ -100,6 +101,7 @@ export default function PromptCard({
   onRequireLogin,
   onLinkCopied,
 }: Props) {
+  const router = useRouter();
   const [premiumOpen, setPremiumOpen] = useState(false);
   const isPremium = p.badge === 'premium';
   const { likes, comments } = getEngagement(p.id);
@@ -128,16 +130,20 @@ export default function PromptCard({
     onCopy(p.prompt);
   };
 
+  // Viewing the detail page is sign-in only — guests always see a locked
+  // button regardless of how many free copies they have left.
+  const isViewLocked = !unlimited;
+
   const handleViewClick = () => {
     if (isPremium) {
       handlePremiumClick();
       return;
     }
-    if (isCopyLocked) {
+    if (isViewLocked) {
       onRequireLogin?.();
       return;
     }
-    // Detail page navigation will be wired here
+    router.push(`/prompt/${p.id}`);
   };
 
   const handleCardClick = () => {
@@ -237,7 +243,7 @@ export default function PromptCard({
                       )}
                     </button>
                   )}
-                  {isCopyLocked ? (
+                  {isViewLocked ? (
                     <button
                       type="button"
                       className={styles.viewLockedBtn}
