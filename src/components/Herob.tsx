@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import styles from "./HeroB.module.css";
+import styles from "./Herob.module.css";
 
 const cards = [
   { title: "Cyberpunk Portrait", tool: "Midjourney", hot: true },
